@@ -12,6 +12,7 @@
     {% endif %}
 
     {{ form_start(form) }}
+    {{ form_row(form.recaptcha) }}
     {{ form_widget(form) }}
     <button type="submit">Submit</button>
     {{ form_end(form) }}

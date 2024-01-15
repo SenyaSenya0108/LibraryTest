@@ -24,3 +24,9 @@ services:
       - target: 3903
         published: 3903
         protocol: tcp
+
+###> symfony/mailer ###
+  mailer:
+    image: sj26/mailcatcher
+    ports: ["1025", "1080"]
+###< symfony/mailer ###

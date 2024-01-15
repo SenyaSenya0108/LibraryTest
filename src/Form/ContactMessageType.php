@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ContactMessage;
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaV3Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -21,15 +21,13 @@ class ContactMessageType extends AbstractType
             ->add('name', TextType::class, ['required' => false])
             ->add('message', TextareaType::class)
             ->add('phone', TelType::class, ['required' => false])
-            ->add('recaptcha', EWZRecaptchaType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new \EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue()
-                ]
+            ->add('recaptcha', EWZRecaptchaV3Type::class, [
+                'label' => 'reCAPTCHA',
+                'mapped' => false, // чтобы поле не было связано с сущностью
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ContactMessage::class,
